@@ -2,17 +2,14 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-const MonacoEditor = dynamic(import("react-monaco-editor"), { ssr: false });
+const MonacoEditor = dynamic(() => import("react-monaco-editor"), { ssr: false });
 
 function App() {
   const [postBody, setPostBody] = React.useState("");
-  // etc
+
   return (<div>
-  {/* etc */}
     <MonacoEditor
       editorDidMount={() => {
-        // @ts-ignore
-        console.log('Mount');
         window.MonacoEnvironment!.getWorkerUrl = (
           _moduleId: string,
           label: string
@@ -34,10 +31,10 @@ function App() {
       height={500}
       language="javascript"
       theme="vs-dark"
-      value={postBody}
-      onChange={setPostBody}
+      value={"hello"}
       width={500}
     />
+    <input type="text" value={postBody} onChange={(e) => setPostBody(e.target.value)} />
   </div>)
 }
 
