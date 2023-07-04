@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@asyncapi/parser": "^2.0.3",
     "@babel/core": "^7.22.5",
     "@monaco-editor/react": "^4.5.1",
     "@types/node": "20.3.2",
