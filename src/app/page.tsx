@@ -3,6 +3,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 const MonacoEditor = dynamic(() => import("react-monaco-editor"), { ssr: false });
+import type { ParseOutput } from '@asyncapi/parser'
 import Parser from '@asyncapi/parser/browser'
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     if (typeof window !== 'undefined') { // If we're on the browser...
       const parser = new Parser();
 
-      const { document, diagnostics, extras } = await parser.parse(`
+      const { document, diagnostics, extras }: ParseOutput = await parser.parse(`
       asyncapi: '2.4.0'
       info:
         title: Example AsyncAPI specification
