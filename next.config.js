@@ -15,7 +15,7 @@ const MONACO_DIR = path.resolve(__dirname, './node_modules/monaco-editor');
 
 module.exports = withTM({
   // withCSS({
-    webpack: config => {
+    webpack: (config, { isServer }) => {
       const rule = config.module.rules
         .find(rule => rule.oneOf)
         .oneOf.find(
@@ -42,23 +42,25 @@ module.exports = withTM({
       //   use: ['babel-loader'],
       },);
   
-      config.plugins.push(
-        new MonacoWebpackPlugin({
-          languages: [
-            "json",
-            "markdown",
-            "css",
-            "typescript",
-            "javascript",
-            "html",
-            "graphql",
-            "python",
-            "scss",
-            "yaml"
-          ],
-          filename: "static/[name].worker.js"
-        })
-      );
+      if (!isServer) {
+        config.plugins.push(
+          new MonacoWebpackPlugin({
+            languages: [
+              "json",
+              "markdown",
+              "css",
+              "typescript",
+              "javascript",
+              "html",
+              "graphql",
+              "python",
+              "scss",
+              "yaml"
+            ],
+            filename: "static/[name].worker.js"
+          })
+        );
+      }
       
         if (config.module.generator?.asset?.filename) {
           if (!config.module.generator['asset/resource']) {
